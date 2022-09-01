@@ -1,28 +1,22 @@
 from logging import root
 import os
-from typing import Generator, Iterable
 from anytree import Node, RenderTree
 import sys
 
 
-def os_walk(root_folder, max_depth = 4):
+def main(root_folder: str, max_depth: int = 4) -> Node:
     # Test os.walk based directory tree traversal
-
-    # for (root,dirs,files) in walk:
-    #     print(root)
-    #     print(dirs)
-    #     print(files)
-    #     print('--------------------------------')
-    root = Node(root_folder)
+    dir_tree = Node(root_folder)
     if max_depth > 0:
-        getChild(root, max_depth)
+        getChild(dir_tree, max_depth)
 
+    # My default stdout is encoded in cp1252, ensure it changes to utf-8 for special characters
     sys.stdout.reconfigure(encoding="utf-8")
-    for pre, fill, node in RenderTree(root):
+    for pre, fill, node in RenderTree(dir_tree):
         print(f"{pre}{node.name}")
     # print(RenderTree(root))
 
-    pass
+    return dir_tree
 
 
 def getChild(node: Node, max_depth: int):
@@ -47,4 +41,4 @@ def getChild(node: Node, max_depth: int):
 if __name__ == "__main__":
     root_folder = "./1"
     root_folder = "C:\\Users\\Hayden\\Documents\\GitRepositories"
-    os_walk(root_folder, max_depth=4)
+    dir_tree = main(root_folder, max_depth=10)
