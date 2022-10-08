@@ -64,7 +64,7 @@ def crawlFolderPy(root_folder: str, max_depth: int = 3, max_time: float = 1e9) -
     return dir_tree, status
 
 
-def getChildren(node: Node, max_depth: int, end_time: float) -> int:
+def getChildren(node: Node, max_depth: int, end_time: float) -> Status:
     path = "/".join([_.name for _ in node.path])
     walk = os.walk(path)
     try:
