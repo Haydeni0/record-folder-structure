@@ -13,9 +13,12 @@ def main(root_folder: str, max_depth: int = 4) -> Node:
 
     # My default stdout is encoded in cp1252, ensure it changes to utf-8 for special characters
     sys.stdout.reconfigure(encoding="utf-8")
+
+    # Output the tree in console
+    # print(RenderTree(root)) # Don't use this one, as it doesn't look as nice
     for pre, fill, node in RenderTree(dir_tree):
         print(f"{pre}{node.name}")
-    # print(RenderTree(root))
+    
     # Size of a graph is the number of edges (tree order would be the size + 1)
     print(f"Tree size: {len(dir_tree.descendants)}")
 
@@ -42,8 +45,7 @@ def getChildren(node: Node, max_depth: int):
 
 
 if __name__ == "__main__":
-    root_folder = "./1"
-    root_folder = "/mnt/c/Users/Hayden/Documents/GitRepositories"
+    root_folder = "./test_dir"
     root_folder = "/mnt/c/Users/Hayden/"
     dir_tree = main(root_folder, max_depth=3)
     pass
