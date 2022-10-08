@@ -121,6 +121,12 @@ if __name__ == "__main__":
     args = parser.parse_args()
     args = vars(args)
 
+    # Remove any quotes parsed from incorrectly formed arguments. 
+    # E.g. on Windows: 
+    #   -f 'C:\Program Files\'
+    # is parsed as a string C:\Program Files"
+    args["root_folder"] = args["root_folder"].replace("\"", "")
+
     # Run the folder crawler
     start_time = time()
     dir_tree, status = crawlFolder(**args)

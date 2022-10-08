@@ -4,11 +4,9 @@
 - Instead of having each node be a string, make it a class that gives more information about the file or directory
   - This will make it easier to tell if it's a file or a folder, even when reached max depth
 - Check cpu vs read speed
-- Check size of the tree 
+- Check size in bytes of the tree 
   - Compare to the smallest size it could be (space efficiency) 
     - size of individual strings + pointers in bytes
-- Could try in c++ with the [boost graph library](https://www.boost.org/doc/libs/1_70_0/libs/graph/doc/index.html)
-- Make this threaded
 - Try a different library with a built-in search
 
 ---
@@ -27,6 +25,8 @@
 
 - Make use of already existing libraries if possible
 - Be fast
+  - Python recursion/loop is fast enough, as we are mostly limited by read speed, especially for hard drives.
+  - Maybe consider something faster for NVMe SSDs
 - Store in a space efficient format
 - Be easy to use, maybe implement as a command line utility with ability to pass in options
 - Be safe, make sure it has read only permissions
