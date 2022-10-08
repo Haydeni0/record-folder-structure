@@ -1,7 +1,15 @@
 
 ## To-do:
 
--
+- Instead of having each node be a string, make it a class that gives more information about the file or directory
+  - This will make it easier to tell if it's a file or a folder, even when reached max depth
+- Check cpu vs read speed
+- Check size of the tree 
+  - Compare to the smallest size it could be (space efficiency) 
+    - size of individual strings + pointers in bytes
+- Could try in c++ with the [boost graph library](https://www.boost.org/doc/libs/1_70_0/libs/graph/doc/index.html)
+- Make this threaded
+- Try a different library with a built-in search
 
 ---
 
@@ -45,6 +53,9 @@
 - What format to save in for ease of use and space efficiency
   - Maybe json, or more basic tree structure linked list
   - It will just be text
+
+- Getting a StopIteration exception
+  - I think this happens when os.walk hits the bottom of a branch and resets back to the node above
 
 
 
