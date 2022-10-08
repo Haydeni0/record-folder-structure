@@ -14,7 +14,7 @@ class Status(Enum):
     MAX_TIME_EXCEEDED = -1
 
 
-def crawlFolderPy(root_folder: str, max_depth: int = 3, max_time: float = 1e9) -> Tuple[Node, Status]:
+def crawlFolder(root_folder: str, max_depth: int = 3, max_time: float = 1e9) -> Tuple[Node, Status]:
     """
     Python serial os.walk based folder crawler
     
@@ -96,5 +96,5 @@ def getChildren(node: Node, max_depth: int, end_time: float) -> Status:
 if __name__ == "__main__":
     root_folder = "./test_dir"
     root_folder = "/mnt/c/Users/Hayden/"
-    dir_tree = crawlFolderPy(root_folder, max_depth=3, max_time=1)
+    dir_tree = crawlFolder(root_folder, max_depth=3, max_time=1)
     pass
