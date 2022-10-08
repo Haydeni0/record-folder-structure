@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from logging import root
 import os
 from anytree import Node, RenderTree
@@ -8,18 +10,20 @@ def main(root_folder: str, max_depth: int = 4) -> Node:
     # Test os.walk based directory tree traversal
     dir_tree = Node(root_folder)
     if max_depth > 0:
-        getChild(dir_tree, max_depth)
+        getChildren(dir_tree, max_depth)
 
     # My default stdout is encoded in cp1252, ensure it changes to utf-8 for special characters
     sys.stdout.reconfigure(encoding="utf-8")
     for pre, fill, node in RenderTree(dir_tree):
         print(f"{pre}{node.name}")
     # print(RenderTree(root))
+    # Size of a graph is the number of edges (tree order would be the size + 1)
+    print(f"Tree size: {len(dir_tree.descendants)}")
 
     return dir_tree
 
 
-def getChild(node: Node, max_depth: int):
+def getChildren(node: Node, max_depth: int):
     path = "/".join([_.name for _ in node.path])
     walk = os.walk(path)
     try:
@@ -31,7 +35,7 @@ def getChild(node: Node, max_depth: int):
     for child_dir in dirnames:
         c = Node(child_dir, parent = node)
         if c.depth < max_depth:
-            getChild(c, max_depth)
+            getChildren(c, max_depth)
             
     for child_file in filenames:
         Node(child_file, parent = node)
@@ -40,5 +44,7 @@ def getChild(node: Node, max_depth: int):
 
 if __name__ == "__main__":
     root_folder = "./1"
-    root_folder = "C:\\Users\\Hayden\\Documents\\GitRepositories"
-    dir_tree = main(root_folder, max_depth=10)
+    root_folder = "/mnt/c/Users/Hayden/Documents/GitRepositories"
+    root_folder = "/mnt/c/Users/Hayden/"
+    dir_tree = main(root_folder, max_depth=3)
+    pass
