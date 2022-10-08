@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-from logging import root
 import os
 from anytree import Node, RenderTree
 import sys
