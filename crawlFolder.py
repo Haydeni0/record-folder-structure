@@ -120,12 +120,14 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     args = vars(args)
-
-    # Remove any quotes parsed from incorrectly formed arguments. 
-    # E.g. on Windows: 
-    #   -f 'C:\Program Files\'
-    # is parsed as a string C:\Program Files"
-    args["root_folder"] = args["root_folder"].replace("\"", "")
+    
+    root_folder = args["root_folder"]
+    max_depth = args["max_depth"]
+    if not os.path.isdir(args["root_folder"]):
+        print(f"Error, \"{root_folder}\" is not a valid folder")
+        raise
+    else:
+        print(f"Crawling \"{root_folder}\" to a maximum depth of {max_depth}...")
 
     # Run the folder crawler
     start_time = time()
@@ -136,10 +138,9 @@ if __name__ == "__main__":
     if status == Status.MAX_TIME_EXCEEDED:
         print(f"Search stopped after reaching the time limit.")
     if status == Status.MAX_DEPTH_REACHED:
-        md = args["max_depth"]
-        print(f"Search completed down to a tree depth of {md}.")
+        print(f"Search completed down to a tree depth of {max_depth}.")
     if status == Status.OK:
-        print(f"Search completed.")
+        print(f"Search completed fully (tree depth never exceeded max depth).")
 
     # Size of a graph is the number of edges (tree order would be the size + 1)
     print(f"Tree size (# of edges): {len(dir_tree.descendants)}")
