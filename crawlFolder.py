@@ -19,9 +19,8 @@ def crawlFolder(
     root_folder: str, max_depth: int = 3, max_time: float = 1e9, print_tree: bool = False
 ) -> Tuple[Node, Status]:
     """
-    Python serial os.walk based folder crawler
-
-    Conducts a recursive depth first search (up to a maximum depth) of folder.
+    Python serial os.walk based folder crawler.
+    Conducts a recursive depth first search (up to a maximum depth) of a folder, returning the folder and filenames in a tree.
 
     Args:
         root_folder (str): Path to the folder to use as the root of the search
@@ -84,7 +83,10 @@ def getChildren(node: Node, max_depth: int, end_time: float) -> Status:
 if __name__ == "__main__":
 
     # Parse command line arguments
-    parser = argparse.ArgumentParser(description="")
+    parser = argparse.ArgumentParser(description="""
+    Python serial os.walk based folder crawler.
+    Conducts a recursive depth first search (up to a maximum depth) of a folder, returning the folder and filenames in a tree.
+    """)
     parser.add_argument(
         "--root_folder",
         "-f",
